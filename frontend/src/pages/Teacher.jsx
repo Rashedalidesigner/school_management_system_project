@@ -1,5 +1,9 @@
-
-import { useGetTeachersQuery, useAddTeacherMutation, useUpdateTeacherMutation, useDeleteTeacherMutation } from '../services/SchoolApi';
+import {
+    useGetTeachersQuery,
+    useAddTeacherMutation,
+    useUpdateTeacherMutation,
+    useDeleteTeacherMutation,
+} from '../services/SchoolApi';
 import { DynamicCRUD } from './DynamicCRUD';
 
 export function TeacherList() {
@@ -7,17 +11,21 @@ export function TeacherList() {
         { key: 'name', label: 'Teacher Name' },
         { key: 'email', label: 'Email Address' },
         { key: 'phone', label: 'Phone' },
-        { key: 'designation', label: 'Designation' } // টিচারের এক্সট্রা কলাম
+        { key: 'subject', label: 'Designation' },
+        { key: 'salary', label: 'Salary' },
+        { key: 'join_date', label: 'Joining_date' },
     ];
 
     const formFields = [
         { name: 'name', label: 'Full Name', required: true },
         { name: 'email', label: 'Email Address', type: 'email', required: true },
         { name: 'phone', label: 'Phone Number', required: true },
-        { name: 'designation', label: 'Designation (e.g. Lecturer)', required: true },
+        { name: 'subject', label: 'Designation (e.g. Lecturer)', required: true },
+        { name: 'salary', type: "number", label: 'Salary', required: true },
+        { name: 'join_date', type: "date", label: 'Joining_date', required: true },
     ];
 
-    const initialFormState = { id: '', name: '', email: '', phone: '', designation: '' };
+    const initialFormState = { id: '', name: '', email: '', phone: '', subject: '', salary: '', join_date: '' };
 
     return (
         <DynamicCRUD

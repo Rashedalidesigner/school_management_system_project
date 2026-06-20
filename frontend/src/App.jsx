@@ -1,9 +1,23 @@
 import Home from "./pages/Home"
 import DashBoard from "./components/DashBoard"
-import TeacherPage from "./components/TeacherPage"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { StudentList } from "./pages/Student"
 import { TeacherList } from "./pages/Teacher"
+import { UserList } from "./pages/User"
+import { SubjectList } from "./pages/Subject"
+import { StudentParentRelationList } from "./pages/StudentParent"
+import { RoutineList } from "./pages/Routine"
+import { ResultList } from "./pages/Result"
+import { ParentList } from "./pages/Parent"
+import { NoticeList } from "./pages/Notice"
+import { LibraryBookList } from "./pages/Library"
+import { IssuedBookList } from "./pages/IssueBook"
+import { FeeList } from "./pages/Fee"
+import { ExamList } from "./pages/Exam"
+import { ClassList } from "./pages/Classes"
+import { AttendanceList } from "./pages/Attendance"
+import { AssignmentList } from "./pages/Assignment"
+import { AssignmentSubmissionList } from "./pages/Submission"
 
 const App = () => {
   const router = createBrowserRouter([
@@ -25,63 +39,63 @@ const App = () => {
         },
         {
           path: "/assignment",
-          element: <DashBoard />,
+          element: <AssignmentList />,
         },
         {
           path: "/assignment-submet",
-          element: <DashBoard />,
+          element: <AssignmentSubmissionList />,
         },
         {
           path: "/attendance",
-          element: <DashBoard />,
+          element: <AttendanceList />,
         },
         {
           path: "/class",
-          element: <DashBoard />,
+          element: <ClassList />,
         },
         {
           path: "/exam",
-          element: <DashBoard />,
+          element: <ExamList />,
         },
         {
           path: "/fee",
-          element: <DashBoard />,
+          element: <FeeList />,
         },
         {
           path: "/issus_book",
-          element: <DashBoard />,
+          element: <IssuedBookList />,
         },
         {
           path: "/libray_book",
-          element: <DashBoard />,
+          element: <LibraryBookList />,
         },
         {
           path: "/notice",
-          element: <TeacherPage />
+          element: <NoticeList />
         },
         {
           path: "/parent",
-          element: <TeacherPage />
+          element: <ParentList />
         },
         {
           path: "/result",
-          element: <TeacherPage />
+          element: <ResultList />
         },
         {
           path: "/routine",
-          element: <TeacherPage />
+          element: <RoutineList />
         },
         {
           path: "/student_parent",
-          element: <TeacherPage />
+          element: <StudentParentRelationList />
         },
         {
           path: "/subject",
-          element: <TeacherPage />
+          element: <SubjectList />
         },
         {
           path: "/user",
-          element: <TeacherPage />
+          element: <UserList />
         },
       ]
     },

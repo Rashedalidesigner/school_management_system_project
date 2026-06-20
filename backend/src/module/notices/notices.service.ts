@@ -4,7 +4,7 @@ import type { Notice } from "./notice.interface";
 const getNoticeFromDB = async () => {
     try {
         const result = await pool.query("SELECT * FROM notices");
-        return result;
+        return result.rows;
     } catch (error: any) {
         return error.message;
     }

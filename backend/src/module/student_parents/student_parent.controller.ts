@@ -6,7 +6,7 @@ const getStudentParents = async (req: Request, res: Response) => {
     try {
         const result = await StudentParentService.getStudentParentFromDB();
         if (!result || result.length === 0) {
-            sendResponse(res, false, 404, "No student parents found");
+            return sendResponse(res, true, 200, "No student parents found");
         }
         sendResponse(res, true, 200, "Student parents fetched successfully", result);
     } catch (error: any) {
@@ -19,7 +19,7 @@ const getStudentParentById = async (req: Request, res: Response) => {
     try {
         const result = await StudentParentService.getStudentParentByIdFromDB(Number(id));
         if (!result) {
-            sendResponse(res, false, 404, "Student parent not found");
+            return sendResponse(res, true, 200, "No student parents found");
         } else {
             sendResponse(res, true, 200, "Student parent fetched successfully", result);
         }
@@ -33,7 +33,7 @@ const addStudentParent = async (req: Request, res: Response) => {
     try {
         const result = await StudentParentService.addStudentParentToDB(req.body);
         if (!result) {
-            sendResponse(res, false, 400, "Failed to add student parent");
+            return sendResponse(res, true, 200, "Faild to add Student parent");
         }
         sendResponse(res, true, 201, "Student parent added successfully", result);
     } catch (error: any) {
@@ -46,7 +46,7 @@ const updateStudentParent = async (req: Request, res: Response) => {
     try {
         const result = await StudentParentService.updateStudentParentInDB(Number(id), req.body);
         if (!result) {
-            sendResponse(res, false, 404, "Student parent not found");
+            return sendResponse(res, true, 200, "No student parents found");
         }
         sendResponse(res, true, 200, "Student parent updated successfully", result);
     } catch (error: any) {
@@ -59,7 +59,7 @@ const deleteStudentParent = async (req: Request, res: Response) => {
     try {
         const result = await StudentParentService.deleteStudentParentFromDB(Number(id));
         if (!result) {
-            sendResponse(res, false, 404, "Student parent not found");
+            return sendResponse(res, true, 200, "No student parents found");
         }
         sendResponse(res, true, 200, "Student parent deleted successfully", result);
     } catch (error: any) {

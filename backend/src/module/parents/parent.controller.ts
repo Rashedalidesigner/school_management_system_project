@@ -6,7 +6,7 @@ const getParent = async (req: Request, res: Response) => {
     try {
         const result = await ParentService.getParentFromDB();
         if (!result || result.length === 0) {
-            sendResponse(res, false, 404, "No parents found");
+            return sendResponse(res, true, 200, "No parents found");
         }
         sendResponse(res, true, 200, "Parents fetched successfully", result);
     } catch (error) {
@@ -19,7 +19,7 @@ const getParentbyId = async (req: Request, res: Response) => {
     try {
         const result = await ParentService.getParentbyIdFromDB(Number(id));
         if (!result || result.length === 0) {
-            sendResponse(res, false, 404, "No parents found");
+            return sendResponse(res, true, 200, "No parents found");
         }
         sendResponse(res, true, 200, "Parents fetched successfully", result);
     } catch (error) {
@@ -31,7 +31,7 @@ const addParent = async (req: Request, res: Response) => {
     try {
         const result = await ParentService.addParentToDB(req.body);
         if (!result) {
-            sendResponse(res, false, 400, "Failed to add parent");
+            return sendResponse(res, true, 200, "Failed to add parent");
         }
         sendResponse(res, true, 201, "Parent added successfully", result);
     } catch (error) {
@@ -44,7 +44,7 @@ const updateParent = async (req: Request, res: Response) => {
     try {
         const result = await ParentService.updateParentInDB(Number(id), req.body);
         if (!result) {
-            sendResponse(res, false, 404, "Parent not found");
+            return sendResponse(res, true, 200, "Parent not found");
         }
         sendResponse(res, true, 200, "Parent updated successfully", result);
     } catch (error) {
@@ -57,7 +57,7 @@ const deleteParent = async (req: Request, res: Response) => {
     try {
         const result = await ParentService.deleteParentFromDB(Number(id));
         if (!result) {
-            sendResponse(res, false, 404, "Parent not found");
+            return sendResponse(res, true, 200, "Parent not found");
         }
         sendResponse(res, true, 200, "Parent deleted successfully", result);
     } catch (error) {

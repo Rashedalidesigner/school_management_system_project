@@ -3,7 +3,7 @@ import { assignmentsController } from "./assignmets.controller";
 
 const router = Router();
 
-router.get("/assinment", assignmentsController.getAssignments);
+router.get("/assignment", assignmentsController.getAssignments);
 router.post("/assignment", assignmentsController.createAssignment);
 router.get("/assignment/:id", assignmentsController.getAssignmentById);
 router.patch("/assignment/:id", assignmentsController.updateAssignment);

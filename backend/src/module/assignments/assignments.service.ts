@@ -23,7 +23,7 @@ const getAssignmentByIdFromDb = async (id: number) => {
 
 const updateAssignmentInDb = async (id: number, updatedata: Assignment) => {
     const result = await pool.query(
-        "UPDATE assignments SET class_id=1,subject_id=2,teacher_id=3, title = $4, description = $5, due_date = $6 WHERE id = $7 RETURNING *",
+        "UPDATE assignments SET class_id=$1,subject_id=$2,teacher_id=$3, title = $4, description = $5, due_date = $6 WHERE id = $7 RETURNING *",
         [updatedata.class_id, updatedata.subject_id, updatedata.teacher_id, updatedata.title, updatedata.description, updatedata.due_date, id]
     );
     return result.rows[0];

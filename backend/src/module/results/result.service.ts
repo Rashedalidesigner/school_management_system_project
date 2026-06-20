@@ -22,7 +22,7 @@ const getResultByIdFromDb = async (id: number) => {
 
 const addResultToDb = async (resultData: Result) => {
     try {
-        const result = await pool.query("INSERT INTO results (student_id,exam_id,subject_mark,marks,grade) VALUES ($1, $2, $3, $4, $5) RETURNING * ", [resultData.student_id, resultData.exam_id, resultData.subject_mark, resultData.marks, resultData.grade]);
+        const result = await pool.query("INSERT INTO results (student_id,exam_id,marks,grade) VALUES ($1, $2, $3, $4) RETURNING * ", [resultData.student_id, resultData.exam_id, resultData.marks, resultData.grade]);
         return result.rows[0];
     } catch (error: any) {
         return error.message;
@@ -31,7 +31,7 @@ const addResultToDb = async (resultData: Result) => {
 
 const updateResultInDb = async (id: number, resultData: Result) => {
     try {
-        const result = await pool.query("UPDATE results SET student_id = $1, exam_id = $2, subject_mark = $3, marks = $4, grade = $5 WHERE id = $6 RETURNING *", [resultData.student_id, resultData.exam_id, resultData.subject_mark, resultData.marks, resultData.grade, id]);
+        const result = await pool.query("UPDATE results SET student_id = $1, exam_id = $2, marks = $3, grade = $4 WHERE id = $5 RETURNING *", [resultData.student_id, resultData.exam_id, resultData.marks, resultData.grade, id]);
         return result.rows[0];
     }
     catch (error: any) {

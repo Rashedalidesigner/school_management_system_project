@@ -20,6 +20,7 @@ const getuserByIdFromDb = async (id: number) => {
 }
 
 const adduserToDb = async (user: User) => {
+    console.log(user);
     try {
         const result = await pool.query("INSERT INTO users (name, email, phone, password, role, profile_image) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *", [user.name, user.email, user.phone, user.password, user.role, user.profile_image]);
         return result.rows[0];

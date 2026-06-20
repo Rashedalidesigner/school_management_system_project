@@ -88,6 +88,7 @@ const deleteassignmentSubmetion = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
         const result = await assignmentsSubmetionService.deleteAssignmentSubmissionFromDb(Number(id));
+        console.log(result)
         if (!result) {
             return sendResponse(res, false, 404, "Assignment submetion not found", null);
         }

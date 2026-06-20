@@ -6,14 +6,14 @@ export function DynamicCRUD({ title, queryHook, addHook, updateHook, deleteHook,
     const [createRecord, { isLoading: isAdding }] = addHook();
     const [updateRecord, { isLoading: isUpdating }] = updateHook();
     const [deleteRecord] = deleteHook();
-    console.log(error);
 
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
     const [formData, setFormData] = useState(initialFormState);
 
-    // এপিআই রেসপন্স থেকে অ্যারে ডেটা বের করা (যেমন: responseData.data বা সরাসরি responseData)
+
     const records = responseData?.data || (Array.isArray(responseData) ? responseData : []);
+
 
     if (isLoading) return <div className="text-gray-500 p-6 animate-pulse font-medium">Loading {title} data...</div>;
     if (error) return <div className="text-red-500 p-6 font-medium">Error loading data asset matrix.</div>;
@@ -31,7 +31,6 @@ export function DynamicCRUD({ title, queryHook, addHook, updateHook, deleteHook,
 
     const openEditModal = (record) => {
         setIsEditMode(true);
-        // ডেট ফরম্যাট ফিল্ড থাকলে তা ইনপুট টাইপ="date" এর জন্য ক্লিন করা (YYYY-MM-DD)
         const cleanedRecord = { ...record };
         formFields.forEach(field => {
             if (field.type === 'date' && cleanedRecord[field.name]) {
@@ -55,7 +54,8 @@ export function DynamicCRUD({ title, queryHook, addHook, updateHook, deleteHook,
             }
             setIsFormOpen(false);
         } catch (err) {
-            alert('Operation failed: ' + (err.data?.message || 'System error'));
+            console.log(err)
+            alert('Operation failed: ' + (err?.message || 'System error'));
         }
     };
 
@@ -143,8 +143,24 @@ export function DynamicCRUD({ title, queryHook, addHook, updateHook, deleteHook,
                             {formFields.map((field) => (
                                 <div key={field.name}>
                                     <label className="block text-xs font-semibold text-gray-600 uppercase mb-1">{field.label}</label>
+
+                                    {/* 1. Textarea Condition */}
                                     {field.type === 'textarea' ? (
                                         <textarea name={field.name} rows={field.rows || 2} value={formData[field.name] || ''} onChange={handleInputChange} required={field.required} className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 outline-none resize-none" />
+
+                                        /* 2. NEW: Select Condition */
+                                    ) : field.type === 'select' ? (
+                                        <select name={field.name} value={formData[field.name] || ''} onChange={handleInputChange} required={field.required} className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 outline-none bg-white">
+                                            <option disabled>Select an option</option>
+                                            {console.log(field.options)}
+                                            {field.options?.map((option) => (
+                                                <option key={option} value={option}>
+                                                    {option}
+                                                </option>
+                                            ))}
+                                        </select>
+
+                                        /* 3. Default Input Condition */
                                     ) : (
                                         <input type={field.type || 'text'} name={field.name} value={formData[field.name] || ''} onChange={handleInputChange} required={field.required} className="w-full border rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 outline-none" />
                                     )}

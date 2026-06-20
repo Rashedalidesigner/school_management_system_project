@@ -124,6 +124,7 @@ export function StudentList() {
                 <table className="w-full text-left border-collapse whitespace-nowrap">
                     <thead>
                         <tr className="bg-gray-100 text-gray-600 text-xs font-semibold uppercase tracking-wider border-b border-gray-200">
+                            <th className="px-6 py-3 w-16">Student Id</th>
                             <th className="px-6 py-3 w-16">Roll</th>
                             <th className="px-6 py-3">Student Info</th>
                             <th className="px-6 py-3">Class Context</th>
@@ -136,6 +137,11 @@ export function StudentList() {
                         {students?.data && students.data.length > 0 ? (
                             students.data.map((student) => (
                                 <tr key={student.id} className="hover:bg-gray-50/80 transition-colors group">
+                                    <td className="px-6 py-4">
+                                        <span className="font-mono bg-gray-100 text-gray-800 font-bold px-2.5 py-1 rounded-md text-xs">
+                                            #{String(student.id || 0).padStart(2, '0')}
+                                        </span>
+                                    </td>
                                     <td className="px-6 py-4">
                                         <span className="font-mono bg-gray-100 text-gray-800 font-bold px-2.5 py-1 rounded-md text-xs">
                                             #{String(student.roll_number || 0).padStart(2, '0')}

@@ -5,8 +5,9 @@ import { LibrayBooksService } from "./libray_books.service";
 const getLibraryBooks = async (req: Request, res: Response) => {
     try {
         const result = await LibrayBooksService.getLibrayBookFromDb();
+        console.log(result)
         if (!result || result.length === 0) {
-            sendResponse(res, false, 404, "No library books found");
+            return sendResponse(res, true, 200, "No library books found");
         }
         sendResponse(res, true, 200, "Library Books fetched successfully", result);
     } catch (error: any) {
