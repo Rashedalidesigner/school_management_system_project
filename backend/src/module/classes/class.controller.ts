@@ -6,7 +6,7 @@ const getclass = async (req: Request, res: Response) => {
     try {
         const result = await classService.getclassintoDb();
         if (result.length === 0) {
-            return sendResponse(res, false, 500, "No classes found");
+            return sendResponse(res, false, 200, "No classes found");
         }
         sendResponse(res, true, 200, "Classes fetched successfully", result);
     } catch (error: any) {
@@ -19,7 +19,7 @@ const getclassById = async (req: Request, res: Response) => {
     try {
         const result = await classService.getclassByIdFromDb(Number(id));
         if (!result) {
-            return sendResponse(res, false, 404, "Class not found");
+            return sendResponse(res, false, 200, "Class not found");
         }
         sendResponse(res, true, 200, "Class fetched successfully", result);
     } catch (error: any) {
@@ -31,7 +31,7 @@ const createclass = async (req: Request, res: Response) => {
     try {
         const result = await classService.createclassInDb(req.body);
         if (!result) {
-            return sendResponse(res, false, 400, "Failed to create class");
+            return sendResponse(res, false, 200, "Failed to create class");
         }
         sendResponse(res, true, 201, "Class created successfully", result);
     } catch (error: any) {
@@ -44,7 +44,7 @@ const updateclass = async (req: Request, res: Response) => {
     try {
         const result = await classService.updateclassInDb(Number(id), req.body);
         if (!result) {
-            return sendResponse(res, false, 404, "Class not found");
+            return sendResponse(res, false, 200, "Class not found");
         }
         sendResponse(res, true, 200, "Class updated successfully", result);
     } catch (error: any) {
@@ -57,7 +57,7 @@ const deleteclass = async (req: Request, res: Response) => {
     try {
         const result = await classService.deleteclassInDb(Number(id));
         if (!result) {
-            return sendResponse(res, false, 404, "Class not found");
+            return sendResponse(res, false, 200, "Class not found");
         }
         sendResponse(res, true, 200, "Class deleted successfully", result);
     } catch (error: any) {

@@ -6,7 +6,7 @@ const getAttendance = async (req: Request, res: Response) => {
     try {
         const result = await attendanceService.getAttendanceFromDB();
         if (result.length === 0) {
-            return sendResponse(res, true, 404, "No attendance records found");
+            return sendResponse(res, true, 200, "No attendance records found");
         }
         return sendResponse(res, true, 200, "Attendance records fetched successfully", result);
     } catch (error) {
@@ -19,7 +19,7 @@ const getAttendanceById = async (req: Request, res: Response) => {
     try {
         const result = await attendanceService.getAttendanceByIdFromDB(Number(id));
         if (!result) {
-            return sendResponse(res, true, 404, "Attendance record not found");
+            return sendResponse(res, true, 200, "Attendance record not found");
         }
         return sendResponse(res, true, 200, "Attendance record fetched successfully", result);
     } catch (error) {
@@ -31,7 +31,7 @@ const getAttendanceByclassId = async (req: Request, res: Response) => {
     try {
         const result = await attendanceService.getAttendanceByclassIdFromDB(Number(id));
         if (!result) {
-            return sendResponse(res, true, 404, "Attendance record not found");
+            return sendResponse(res, true, 200, "Attendance record not found");
         }
         return sendResponse(res, true, 200, "Attendance record fetched successfully", result);
     } catch (error) {
@@ -43,7 +43,7 @@ const getAttendanceBystudentId = async (req: Request, res: Response) => {
     try {
         const result = await attendanceService.getAttendanceBystudentIdFromDB(Number(id));
         if (!result) {
-            return sendResponse(res, true, 404, "Attendance record not found");
+            return sendResponse(res, true, 200, "Attendance record not found");
         }
         return sendResponse(res, true, 200, "Attendance record fetched successfully", result);
     } catch (error) {
@@ -56,11 +56,11 @@ const getAttendanceBydateId = async (req: Request, res: Response) => {
 
     try {
         if (!date) {
-            return sendResponse(res, false, 500, "plase enter date");
+            return sendResponse(res, false, 200, "plase enter date");
         }
         const result = await attendanceService.getAttendanceBydateIdFromDB(date);
         if (!result) {
-            return sendResponse(res, true, 404, "Attendance record not found");
+            return sendResponse(res, true, 200, "Attendance record not found");
         }
         return sendResponse(res, true, 200, "Attendance record fetched successfully", result);
     } catch (error) {
@@ -73,7 +73,7 @@ const createAttendance = async (req: Request, res: Response) => {
     try {
         const result = await attendanceService.createAttendanceFromDB(attendanceData);
         if (!result) {
-            return sendResponse(res, true, 400, "Failed to create attendance record");
+            return sendResponse(res, true, 200, "Failed to create attendance record");
         }
         return sendResponse(res, true, 201, "Attendance record created successfully", result);
     } catch (error) {
@@ -87,7 +87,7 @@ const updateAttendance = async (req: Request, res: Response) => {
     try {
         const result = await attendanceService.updateAttendanceFromDB(Number(id), attendanceData);
         if (!result) {
-            return sendResponse(res, true, 404, "Attendance record not found");
+            return sendResponse(res, true, 200, "Attendance record not found");
         }
         return sendResponse(res, true, 200, "Attendance record updated successfully", result);
     } catch (error) {
@@ -100,7 +100,7 @@ const deleteAttendance = async (req: Request, res: Response) => {
     try {
         const result = await attendanceService.deleteAttendanceFromDB(Number(id));
         if (!result) {
-            return sendResponse(res, true, 404, "Attendance record not found");
+            return sendResponse(res, true, 200, "Attendance record not found");
         }
         return sendResponse(res, true, 200, "Attendance record deleted successfully", result);
     } catch (error) {

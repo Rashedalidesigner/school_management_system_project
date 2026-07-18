@@ -6,7 +6,7 @@ const getsubjects = async (req: Request, res: Response) => {
     try {
         const result = await SubjectService.getsubjectFromDb();
         if (!result || result.length === 0) {
-            sendResponse(res, false, 404, "No subjects found");
+            sendResponse(res, false, 200, "No subjects found");
         } else {
             sendResponse(res, true, 200, "Subjects fetched successfully", result);
         }
@@ -20,7 +20,7 @@ const getsubjectById = async (req: Request, res: Response) => {
     try {
         const result = await SubjectService.getsubjectByIdFromDb(Number(id));
         if (!result) {
-            sendResponse(res, false, 404, "Subject not found");
+            sendResponse(res, false, 200, "Subject not found");
         } else {
             sendResponse(res, true, 200, "Subject fetched successfully", result);
         }
@@ -33,7 +33,7 @@ const getsubjectByclassId = async (req: Request, res: Response) => {
     try {
         const result = await SubjectService.getsubjectByclassIdFromDb(Number(id));
         if (!result) {
-            sendResponse(res, false, 404, "Subject not found");
+            sendResponse(res, false, 200, "Subject not found");
         } else {
             sendResponse(res, true, 200, "Subject fetched successfully", result);
         }
@@ -46,7 +46,7 @@ const addsubject = async (req: Request, res: Response) => {
     try {
         const result = await SubjectService.addsubjectToDb(req.body);
         if (!result) {
-            sendResponse(res, false, 400, "Failed to add subject");
+            sendResponse(res, false, 200, "Failed to add subject");
         } else {
             sendResponse(res, true, 201, "Subject added successfully", result);
         }
@@ -60,7 +60,7 @@ const updatesubject = async (req: Request, res: Response) => {
     try {
         const result = await SubjectService.updatesubjectInDb(Number(id), req.body);
         if (!result) {
-            sendResponse(res, false, 404, "Subject not found");
+            sendResponse(res, false, 200, "Subject not found");
         } else {
             sendResponse(res, true, 200, "Subject updated successfully", result);
         }
@@ -74,7 +74,7 @@ const deletesubject = async (req: Request, res: Response) => {
     try {
         const result = await SubjectService.deletesubjectFromDb(Number(id));
         if (!result) {
-            sendResponse(res, false, 404, "Subject not found");
+            sendResponse(res, false, 200, "Subject not found");
         } else {
             sendResponse(res, true, 200, "Subject deleted successfully", result);
         }

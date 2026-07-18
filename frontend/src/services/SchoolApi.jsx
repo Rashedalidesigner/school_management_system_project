@@ -1,8 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import dotenv from "dotenv";
+
+// dotenv.config();
+console.log(import.meta.env.VITE_API_BASE_URL);
 
 export const schoolApi = createApi({
     reducerPath: 'schoolApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/api' }),
+    baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_API_BASE_URL }),
     tagTypes: [
         'Assignments', 'Submissions', 'Attendance', 'Classes', 'Exams',
         'Fees', 'IssueBook', 'Library', 'Notices', 'Parents',

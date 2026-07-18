@@ -1,18 +1,13 @@
-import { Pool } from "pg";
+import { Pool, type PoolConfig } from "pg";
 import { config } from "../config/config";
 
 export const pool = new Pool({
-    user: config.DB_USER,
-    host: config.DB_HOST,
-    database: config.DB_NAME,
-    password: config.DB_PASSWORD,
-    port: Number(config.DB_PORT)
+    connectionString:config.DATABASE_URL
 });
 
 export const connectToDatabase = async () => {
     try {
         await pool.connect();
-
         await pool.query(`
             CREATE TABLE IF NOT EXISTS users (
             id SERIAL PRIMARY KEY,

@@ -7,7 +7,7 @@ const getUsers = async (req: Request, res: Response) => {
     try {
         const users = await UserService.getuserFromDb();
         if (!users || users.length === 0) {
-            sendResponse(res, false, 404, "No users found");
+            sendResponse(res, false, 200, "No users found");
         } else {
             sendResponse(res, true, 200, "Users fetched successfully", users);
         }
@@ -21,7 +21,7 @@ const getUserById = async (req: Request, res: Response) => {
     try {
         const user = await UserService.getuserByIdFromDb(Number(id));
         if (!user) {
-            sendResponse(res, false, 404, "User not found");
+            sendResponse(res, false, 200, "User not found");
         } else {
             sendResponse(res, true, 200, "User fetched successfully", user);
         }
@@ -36,7 +36,7 @@ const addUser = async (req: Request, res: Response) => {
         const password = await bcrypt.hash(user.password, 15);
         user.password = password;
         if (!user) {
-            sendResponse(res, false, 400, "Failed to add user");
+            sendResponse(res, false, 200, "Failed to add user");
         } else {
             sendResponse(res, true, 201, "User added successfully", user);
         }
@@ -50,7 +50,7 @@ const updateUser = async (req: Request, res: Response) => {
     try {
         const user = await UserService.updateuserInDb(Number(id), req.body);
         if (!user) {
-            sendResponse(res, false, 404, "User not found");
+            sendResponse(res, false, 200, "User not found");
         } else {
             sendResponse(res, true, 200, "User updated successfully", user);
         }
@@ -64,7 +64,7 @@ const deleteUser = async (req: Request, res: Response) => {
     try {
         const user = await UserService.deleteuserFromDb(Number(id));
         if (!user) {
-            sendResponse(res, false, 404, "User not found");
+            sendResponse(res, false, 200, "User not found");
         } else {
             sendResponse(res, true, 200, "User deleted successfully", user);
         }

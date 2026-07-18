@@ -16,7 +16,8 @@ export const config = {
     JWT_SECRET: process.env.JWT_SECRET as string,
     JWT_SECRET_LIFETIME: process.env.JWT_SECRET_LIFETIME as string,
     JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET as string,
-    JWT_REFRESH_SECRET_LIFETIME: process.env.JWT_REFRESH_SECRET_LIFETIME as string
+    JWT_REFRESH_SECRET_LIFETIME: process.env.JWT_REFRESH_SECRET_LIFETIME as string,
+    DATABASE_URL:process.env.DATABASE_URL as string
 }
 
 console.log(path.join(process.cwd(), ".env"));

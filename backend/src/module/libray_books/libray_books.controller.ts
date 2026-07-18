@@ -19,7 +19,7 @@ const getLibraryBooksByid = async (req: Request, res: Response) => {
     try {
         const result = await LibrayBooksService.getLibrayBookByIdFromDb(Number(id));
         if (!result || result.length === 0) {
-            sendResponse(res, false, 404, "No library books found");
+            sendResponse(res, false, 200, "No library books found");
         }
         sendResponse(res, true, 200, "Library Books fetched successfully", result);
     } catch (error: any) {
@@ -31,7 +31,7 @@ const addLibraryBook = async (req: Request, res: Response) => {
     try {
         const result = await LibrayBooksService.addLibrayBookToDb(req.body);
         if (!result) {
-            sendResponse(res, false, 400, "Failed to add library book");
+            sendResponse(res, false, 200, "Failed to add library book");
         }
         sendResponse(res, true, 201, "Library Book added successfully", result);
     } catch (error: any) {
@@ -44,7 +44,7 @@ const updateLibraryBook = async (req: Request, res: Response) => {
     try {
         const result = await LibrayBooksService.updateLibrayBookInDb(Number(id), req.body);
         if (!result) {
-            sendResponse(res, false, 404, "Library Book not found");
+            sendResponse(res, false, 200, "Library Book not found");
         }
         sendResponse(res, true, 200, "Library Book updated successfully", result);
     } catch (error: any) {
@@ -57,7 +57,7 @@ const deleteLibraryBook = async (req: Request, res: Response) => {
     try {
         const result = await LibrayBooksService.deleteLibrayBookFromDb(Number(id));
         if (!result) {
-            sendResponse(res, false, 404, "Library Book not found");
+            sendResponse(res, false, 200, "Library Book not found");
         }
         sendResponse(res, true, 200, "Library Book deleted successfully", result);
     } catch (error: any) {

@@ -26,11 +26,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({
-    origin: 'http://localhost:5173', // Allow only your React app to connect
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-    credentials: true
-}));
+app.use(cors());
 
 app.use("/api", assignmentsRoute);
 app.use("/api", assignmentsSubmetionRoute);

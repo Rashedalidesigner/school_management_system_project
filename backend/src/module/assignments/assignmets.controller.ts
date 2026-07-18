@@ -19,7 +19,7 @@ const createAssignment = async (req: Request, res: Response) => {
     try {
         const result = await assignmentsService.createAssignmentIntoDb(req.body);
         if (!result) {
-            return sendResponse(res, false, 400, "Failed to create assignment", null);
+            return sendResponse(res, false, 200, "Failed to create assignment", null);
         }
         sendResponse(res, true, 201, "Assignment created successfully", result);
     } catch (error: any) {
@@ -33,11 +33,11 @@ const getAssignmentById = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
         if (id === undefined) {
-            return sendResponse(res, false, 400, "Assignment ID is required", null);
+            return sendResponse(res, false, 200, "Assignment ID is required", null);
         }
         const result = await assignmentsService.getAssignmentByIdFromDb(Number(id));
         if (!result) {
-            return sendResponse(res, false, 404, "Assignment not exists", null);
+            return sendResponse(res, false, 200, "Assignment not exists", null);
         }
         sendResponse(res, true, 200, "Assignment fetched successfully", result);
     } catch (error: any) {
@@ -50,11 +50,11 @@ const updateAssignment = async (req: Request, res: Response) => {
     try {
         const id = req.params.id;
         if (id === undefined) {
-            return sendResponse(res, false, 400, "Assignment ID is required", null);
+            return sendResponse(res, false, 200, "Assignment ID is required", null);
         }
         const result = await assignmentsService.updateAssignmentInDb(Number(id), req.body);
         if (!result) {
-            return sendResponse(res, false, 404, "Assignment not found", null);
+            return sendResponse(res, false, 200, "Assignment not found", null);
         }
         sendResponse(res, true, 200, "Assignment updated successfully", result);
     } catch (error: any) {
@@ -67,11 +67,11 @@ const deleteAssignment = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
         if (id === undefined) {
-            return sendResponse(res, false, 400, "Assignment ID is required", null);
+            return sendResponse(res, false, 200, "Assignment ID is required", null);
         }
         const result = await assignmentsService.deleteAssignmentFromDb(Number(id));
         if (!result) {
-            return sendResponse(res, false, 404, "Assignment not found", null);
+            return sendResponse(res, false, 200, "Assignment not found", null);
         }
         sendResponse(res, true, 200, "Assignment deleted successfully", result);
     } catch (error: any) {

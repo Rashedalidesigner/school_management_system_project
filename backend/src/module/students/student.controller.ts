@@ -6,7 +6,7 @@ const getstudents = async (req: Request, res: Response) => {
     try {
         const students = await studentervice.getstudentFromDb();
         if (students.length === 0) {
-            return sendResponse(res, false, 500, "No students found");
+            return sendResponse(res, false, 200, "No students found");
         }
         sendResponse(res, true, 200, "Students fetched successfully", students);
     } catch (error) {
@@ -19,7 +19,7 @@ const getstudentById = async (req: Request, res: Response) => {
         const id = req.params.id;
         const student = await studentervice.getstudentByIdFromDb(Number(id));
         if (!student) {
-            return sendResponse(res, false, 404, "Student not found");
+            return sendResponse(res, false, 200, "Student not found");
         }
         sendResponse(res, true, 200, "Student fetched successfully", student);
     } catch (error) {
@@ -31,7 +31,7 @@ const getstudentByclassId = async (req: Request, res: Response) => {
         const id = req.params.id;
         const student = await studentervice.getstudentByclassIdFromDb(Number(id));
         if (!student) {
-            return sendResponse(res, false, 404, "Student not found");
+            return sendResponse(res, false, 200, "Student not found");
         }
         sendResponse(res, true, 200, "Student fetched successfully", student);
     } catch (error) {
@@ -44,7 +44,7 @@ const createstudent = async (req: Request, res: Response) => {
         const student = req.body;
         const newstudent = await studentervice.createstudentInDb(student);
         if (!newstudent) {
-            return sendResponse(res, false, 400, "Failed to create student");
+            return sendResponse(res, false, 200, "Failed to create student");
         }
         sendResponse(res, true, 201, "Student created successfully", newstudent);
     } catch (error) {
@@ -58,7 +58,7 @@ const updatestudent = async (req: Request, res: Response) => {
         const student = req.body;
         const updatedstudent = await studentervice.updatestudentInDb(id, student);
         if (!updatedstudent) {
-            return sendResponse(res, false, 404, "Student not found");
+            return sendResponse(res, false, 200, "Student not found");
         }
         sendResponse(res, true, 200, "Student updated successfully", updatedstudent);
     } catch (error) {
@@ -71,7 +71,7 @@ const deletestudent = async (req: Request, res: Response) => {
         const id = Number(req.params.id);
         const deletedstudent = await studentervice.deletestudentInDb(id);
         if (!deletedstudent) {
-            return sendResponse(res, false, 404, "Student not found");
+            return sendResponse(res, false, 200, "Student not found");
         }
         sendResponse(res, true, 200, "Student deleted successfully", deletedstudent);
     } catch (error) {

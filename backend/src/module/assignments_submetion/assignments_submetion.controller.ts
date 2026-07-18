@@ -19,7 +19,7 @@ const createassignmentSubmetion = async (req: Request, res: Response) => {
     try {
         const result = await assignmentsSubmetionService.createAssignmentSubmission(req.body);
         if (!result) {
-            return sendResponse(res, false, 400, "Failed to create assignment submetion", null);
+            return sendResponse(res, false, 200, "Failed to create assignment submetion", null);
         }
         sendResponse(res, true, 201, "Assignment submetion created successfully", result);
     } catch (error: any) {
@@ -33,7 +33,7 @@ const getassignmentSubmetionById = async (req: Request, res: Response) => {
         const { id } = req.params;
         const result = await assignmentsSubmetionService.getAssignmentSubmissionsById(Number(id));
         if (!result) {
-            return sendResponse(res, false, 404, "Assignment submetion not found", null);
+            return sendResponse(res, false, 200, "Assignment submetion not found", null);
         }
         sendResponse(res, true, 200, "Assignment submetion fetched successfully", result);
     } catch (error: any) {
@@ -47,7 +47,7 @@ const getassignmentSubmetionBystudentId = async (req: Request, res: Response) =>
         const { id } = req.params;
         const result = await assignmentsSubmetionService.getAssignmentSubmissionsById(Number(id));
         if (!result) {
-            return sendResponse(res, false, 404, "Assignment submetion not found", null);
+            return sendResponse(res, false, 200, "Assignment submetion not found", null);
         }
         sendResponse(res, true, 200, "Assignment submetion fetched successfully", result);
     } catch (error: any) {
@@ -61,7 +61,7 @@ const getassignmentSubmetionByAssignmentId = async (req: Request, res: Response)
         const { id } = req.params;
         const result = await assignmentsSubmetionService.getAssignmentSubmissionsById(Number(id));
         if (!result) {
-            return sendResponse(res, false, 404, "Assignment submetion not found", null);
+            return sendResponse(res, false, 200, "Assignment submetion not found", null);
         }
         sendResponse(res, true, 200, "Assignment submetion fetched successfully", result);
     } catch (error: any) {
@@ -75,7 +75,7 @@ const updateassignmentSubmetion = async (req: Request, res: Response) => {
         const { id } = req.params;
         const result = await assignmentsSubmetionService.updateAssignmentSubmissionInDb(Number(id), req.body);
         if (!result) {
-            return sendResponse(res, false, 404, "Assignment submetion not found", null);
+            return sendResponse(res, false, 200, "Assignment submetion not found", null);
         }
         sendResponse(res, true, 200, "Assignment submetion updated successfully", result);
     } catch (error: any) {
@@ -90,7 +90,7 @@ const deleteassignmentSubmetion = async (req: Request, res: Response) => {
         const result = await assignmentsSubmetionService.deleteAssignmentSubmissionFromDb(Number(id));
         console.log(result)
         if (!result) {
-            return sendResponse(res, false, 404, "Assignment submetion not found", null);
+            return sendResponse(res, false, 200, "Assignment submetion not found", null);
         }
         sendResponse(res, true, 200, "Assignment submetion deleted successfully", result);
     } catch (error: any) {

@@ -6,7 +6,7 @@ const getTeachers = async (req: Request, res: Response) => {
     try {
         const teacher = await TeacherService.getTeacherFromDb();
         if (!teacher || teacher.length === 0) {
-            sendResponse(res, false, 404, "No teachers found");
+            sendResponse(res, false, 200, "No teachers found");
         } else {
             sendResponse(res, true, 200, "Teachers fetched successfully", teacher);
         }
@@ -20,7 +20,7 @@ const getTeacherById = async (req: Request, res: Response) => {
     try {
         const teacher = await TeacherService.getTeacherByIdFromDb(Number(id));
         if (!teacher) {
-            sendResponse(res, false, 404, "Teacher not found");
+            sendResponse(res, false, 200, "Teacher not found");
         } else {
             sendResponse(res, true, 200, "Teacher fetched successfully", teacher);
         }
@@ -33,7 +33,7 @@ const addTeacher = async (req: Request, res: Response) => {
     try {
         const teacher = await TeacherService.addTeacherToDb(req.body);
         if (!teacher) {
-            sendResponse(res, false, 400, "Failed to add teacher");
+            sendResponse(res, false, 200, "Failed to add teacher");
         } else {
             sendResponse(res, true, 201, "Teacher added successfully", teacher);
         }
@@ -47,7 +47,7 @@ const updateTeacher = async (req: Request, res: Response) => {
     try {
         const teacher = await TeacherService.updateTeacherInDb(Number(id), req.body);
         if (!teacher) {
-            sendResponse(res, false, 404, "Teacher not found");
+            sendResponse(res, false, 200, "Teacher not found");
         } else {
             sendResponse(res, true, 200, "Teacher updated successfully", teacher);
         }
@@ -61,7 +61,7 @@ const deleteTeacher = async (req: Request, res: Response) => {
     try {
         const teacher = await TeacherService.deleteTeacherFromDb(Number(id));
         if (!teacher) {
-            sendResponse(res, false, 404, "Teacher not found");
+            sendResponse(res, false, 200, "Teacher not found");
         } else {
             sendResponse(res, true, 200, "Teacher deleted successfully", teacher);
         }

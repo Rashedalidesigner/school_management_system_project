@@ -20,7 +20,7 @@ const getFeesById = async (req: Request, res: Response) => {
     try {
         const result = FeesService.getFeesByIdFromDb(Number(id));
         if (!result) {
-            return sendResponse(res, true, 500, "Result not found", result)
+            return sendResponse(res, true, 200, "Result not found", result)
         }
         return sendResponse(res, true, 200, "Fees fetched successfully", result);
     } catch (error: any) {
@@ -32,7 +32,7 @@ const addFees = async (req: Request, res: Response) => {
     try {
         const result = await FeesService.addFeesToDB(req.body);
         if (!result) {
-            return sendResponse(res, false, 400, "Failed to add fees");
+            return sendResponse(res, false, 200, "Failed to add fees");
         }
         return sendResponse(res, true, 201, "Fees added successfully", result);
     }
@@ -46,7 +46,7 @@ const updateFees = async (req: Request, res: Response) => {
     try {
         const result = await FeesService.updateFeesInDB(Number(id), req.body);
         if (!result) {
-            return sendResponse(res, false, 404, "Fees not found");
+            return sendResponse(res, false, 200, "Fees not found");
         }
         return sendResponse(res, true, 200, "Fees updated successfully", result);
     } catch (error: any) {
@@ -59,7 +59,7 @@ const deleteFees = async (req: Request, res: Response) => {
     try {
         const result = await FeesService.deleteFeesFromDB(Number(id));
         if (!result) {
-            return sendResponse(res, false, 404, "Fees not found");
+            return sendResponse(res, false, 200, "Fees not found");
         }
         return sendResponse(res, true, 200, "Fees deleted successfully", result);
     } catch (error: any) {
